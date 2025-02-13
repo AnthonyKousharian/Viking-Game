@@ -1,4 +1,2 @@
 # Viking-Game
-Viking game computer programing 3-4 project.
-YAY
-Yippe
+This is a Project for Computer Programming 3-4, where we plan to make a game and publish it on Steam (maybe)
