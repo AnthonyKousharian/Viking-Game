@@ -1,31 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://o6dagtlued2g"]
+[gd_scene load_steps=5 format=3 uid="uid://o6dagtlued2g"]
 
 [ext_resource type="Texture2D" uid="uid://csnhf85y6a1pk" path="res://Sprites/600px-EnemyGG_allmode.png" id="1_kd2au"]
+[ext_resource type="Script" path="res://enemyfollowing.gd" id="1_of8eb"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_afl4g"]
-radius = 342.345
+[sub_resource type="CircleShape2D" id="CircleShape2D_kreio"]
+radius = 39.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_jjpuq"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_wkdm7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_kd2au")
 }],
 "loop": true,
-"name": &"Default",
+"name": &"default",
 "speed": 5.0
 }]
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_of8eb")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Enemy_CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kreio")
+
+[node name="Enemy_AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy_CollisionShape2D"]
 scale = Vector2(0.1, 0.1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-scale = Vector2(1, 1)
-shape = SubResource("CircleShape2D_afl4g")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_jjpuq")
-animation = &"Default"
+sprite_frames = SubResource("SpriteFrames_wkdm7")
