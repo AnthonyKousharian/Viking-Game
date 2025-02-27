@@ -116,13 +116,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4uo0"]
 size = Vector2(17, 80)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k818s"]
-size = Vector2(46, 48)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wr2nh"]
+radius = 23.0
+height = 92.0
 
 [sub_resource type="Gradient" id="Gradient_jbgss"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_m8nw5"]
 gradient = SubResource("Gradient_jbgss")
+
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_55xad")
@@ -159,3 +162,9 @@ wait_time = 0.25
 [node name="AttackCooldownTimer" type="Timer" parent="AttackArea2D"]
 
 [connection signal="body_entered" from="AttackArea2D" to="AttackArea2D" method="_on_body_entered"]
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_wr2nh")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
