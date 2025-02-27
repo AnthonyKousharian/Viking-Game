@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=4 uid="uid://blsxklxwwpjul"]
 
-[ext_resource type="PackedScene" uid="uid://2pddflqav00q" path="res://player.tscn" id="1_8i2rj"]
+[ext_resource type="PackedScene" uid="uid://2pddflqav00q" path="res://Scenes/player.tscn" id="1_8i2rj"]
 [ext_resource type="Texture2D" uid="uid://b41ttprecxp68" path="res://Sprites/Environment/SnowAll.png" id="1_m7f7p"]
 [ext_resource type="Texture2D" uid="uid://cko5585x28ycg" path="res://Sprites/Environment/Blue.png" id="2_72qrj"]
 [ext_resource type="Texture2D" uid="uid://c2ihrnuywmemn" path="res://Sprites/Environment/Terrain (16x16).png" id="3_2631t"]
