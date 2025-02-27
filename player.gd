@@ -6,6 +6,8 @@ extends CharacterBody2D
 #TODO: change speed to 175 once done with testing
 const SPEED = 300.0
 
+var currentHealth: int = 3
+
 
 func _physics_process(delta: float) -> void:
 	if((velocity.x > 1 || velocity.x < -1 || velocity.y > 1) && !velocity.y < -1):
@@ -38,3 +40,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, 80)
 	move_and_slide()
+
+
+func _on_hitbox_body_entered(body):
+	if is_in_group("enemies"):
+		currentHealth-=1
+			

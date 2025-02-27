@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://2pddflqav00q"]
+[gd_scene load_steps=20 format=3 uid="uid://2pddflqav00q"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_55xad"]
 [ext_resource type="Texture2D" uid="uid://5tqvjujeptoc" path="res://Sprites/Player/Sprite-0001.png" id="2_2bt2b"]
@@ -115,6 +115,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4uo0"]
 size = Vector2(17, 80)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wr2nh"]
+radius = 23.0
+height = 92.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_55xad")
 
@@ -131,3 +135,10 @@ shape = SubResource("RectangleShape2D_l4uo0")
 [node name="PlayerCam" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_wr2nh")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
