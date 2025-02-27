@@ -12,6 +12,8 @@ var SPEED = 300.0
 
 var attack_direction = "Right"
 
+var currentHealth: int = 3
+
 
 func _physics_process(delta: float) -> void:
 	if((velocity.x > 1 || velocity.x < -1 || velocity.y > 1) && !velocity.y < -1):
@@ -92,3 +94,9 @@ func _physics_process(delta: float) -> void:
 		attack_area_2d.monitoring = false
 		attack_area_2d.position.x = 0
 		attack_area_2d.position.y = 0
+
+
+func _on_hitbox_body_entered(body):
+	if is_in_group("enemies"):
+		currentHealth-=1
+			
