@@ -127,7 +127,7 @@ height = 92.0
 gradient = SubResource("Gradient_jbgss")
 
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_55xad")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
@@ -136,7 +136,7 @@ sprite_frames = SubResource("SpriteFrames_v28n6")
 animation = &"hurt"
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 5)
 shape = SubResource("RectangleShape2D_l4uo0")
 

@@ -11,7 +11,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 
 var attack_direction = "Right"
-var currentHealth: int = 3
+var currentHealth: int = 10
 
 
 func _physics_process(delta: float) -> void:
@@ -88,6 +88,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hitbox_body_entered(body):
-	if is_in_group("enemies"):
+	if body.is_in_group("enemies"):
 		currentHealth-=1
-			
+		print(currentHealth)
+	if currentHealth <= 0:
+		get_tree().change_scene_to_file("res://end_screen.tscn")
