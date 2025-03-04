@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://2pddflqav00q"]
+[gd_scene load_steps=21 format=3 uid="uid://2pddflqav00q"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_55xad"]
 [ext_resource type="Texture2D" uid="uid://5tqvjujeptoc" path="res://Sprites/Player/Sprite-0001.png" id="2_2bt2b"]
 [ext_resource type="Texture2D" uid="uid://da8prptrbr3vv" path="res://Sprites/Player/hooded_back.png" id="2_u757t"]
 [ext_resource type="Texture2D" uid="uid://b1liwh7vyc4gj" path="res://Sprites/Player/hoodedRun.png" id="3_rpkd0"]
 [ext_resource type="Texture2D" uid="uid://l06enaty1dr5" path="res://Sprites/Player/hooded_hurt.png" id="4_xv7vy"]
+[ext_resource type="Script" path="res://Scenes/attack_area_2d.gd" id="6_jxmj3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6oqv"]
 atlas = ExtResource("2_2bt2b")
@@ -115,6 +116,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4uo0"]
 size = Vector2(17, 80)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k818s"]
+size = Vector2(46, 48)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_55xad")
 
@@ -124,10 +128,17 @@ sprite_frames = SubResource("SpriteFrames_v28n6")
 animation = &"hurt"
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 5)
 shape = SubResource("RectangleShape2D_l4uo0")
 
 [node name="PlayerCam" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+script = ExtResource("6_jxmj3")
+
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+position = Vector2(47, 0)
+shape = SubResource("RectangleShape2D_k818s")
