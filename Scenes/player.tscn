@@ -125,7 +125,7 @@ script = ExtResource("1_55xad")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v28n6")
-animation = &"hurt"
+animation = &"walk"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -141,4 +141,7 @@ position_smoothing_speed = 10.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_wr2nh")
 
+[node name="Invincibility" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Invincibility" to="." method="_on_invincibile_timeout"]
