@@ -12,6 +12,7 @@ const SPEED = 300.0
 
 var attack_direction = "Right"
 var currentHealth: int = 10
+var invincibility: bool = false
 
 
 func _physics_process(delta: float) -> void:
@@ -21,6 +22,7 @@ func _physics_process(delta: float) -> void:
 		sprite_2d.animation = "back"
 	else:
 		sprite_2d.animation = "default"
+		
 	
 	
 	# To Stay looking left or right
@@ -43,6 +45,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, 80)
+		
+	if invincibility: 
+		$CollisionShape2D.disabled = true
+		$Hitbox/CollisionShape2D.disabled = true
+		
 	move_and_slide()
 	
 	# Directional Attacking
@@ -87,9 +94,23 @@ func _physics_process(delta: float) -> void:
 		attack_area_2d.position.y = 0
 
 
+
 func _on_hitbox_body_entered(body):
-	if body.is_in_group("enemies"):
+	if body.is_in_group("enemies") and !invincibility:
 		currentHealth-=1
+		$PlayerSprite.play("hurt")
 		print(currentHealth)
+		$Invincibility.one_shot = true
+		$Invincibility.start()
+		invincibility = true
 	if currentHealth <= 0:
 		get_tree().change_scene_to_file("res://end_screen.tscn")
+		
+
+
+func _on_invincibile_timeout():
+	invincibility = false
+	$CollisionShape2D.disabled = false
+	$Hitbox/CollisionShape2D.disabled = false
+	print("I frame end")
+	$Invincibility.is_stopped()
