@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://demfr7hvdykfj"]
+
+[ext_resource type="Texture2D" uid="uid://be6cleft0jvqj" path="res://Sprites/Crops/AllWheatStages.png" id="1_b715v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrn3p"]
+atlas = ExtResource("1_b715v")
+region = Rect2(0, 32, 64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4hmf"]
+size = Vector2(64, 64)
+
+[node name="WheatSeeds" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_wrn3p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_u4hmf")
