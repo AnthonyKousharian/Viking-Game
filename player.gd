@@ -1,10 +1,11 @@
 extends CharacterBody2D
 @onready var sprite_2d = $PlayerSprite
 
-
 #speed should be slow and painful so it feels nice to upgrade
 #TODO: change speed to 175 once done with testing
 const SPEED = 300.0
+
+var attack_direction = "Right"
 
 
 func _physics_process(delta: float) -> void:
@@ -23,7 +24,6 @@ func _physics_process(delta: float) -> void:
 		sprite_2d.flip_h = false	
 	
 
-
 	# Handle up and down.
 	var ydirection = Input.get_axis("Up", "Down")
 	if ydirection:
@@ -38,3 +38,35 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, 80)
 	move_and_slide()
+	
+	# Directional Attacking
+	
+	if Input.is_action_just_pressed('Attack Left'):
+		$AttackArea2D.monitoring = true
+		#attack_direction = "Left"
+		$AttackArea2D.position.x = -100
+		$AttackArea2D/Sprite2D.visible = true
+		$AttackArea2D/AttackTimer.start()
+	elif Input.is_action_just_pressed('Attack Right'):
+		$AttackArea2D.monitoring = true
+		#attack_direction = "Right"
+		$AttackArea2D.position.x = 100
+		$AttackArea2D/Sprite2D.visible = true
+		$AttackArea2D/AttackTimer.start()
+	elif Input.is_action_just_pressed('Attack Up'):
+		$AttackArea2D.monitoring = true
+		#attack_direction = "Up"
+		$AttackArea2D.position.y = -100
+		$AttackArea2D/Sprite2D.visible = true
+		$AttackArea2D/AttackTimer.start()
+	elif Input.is_action_just_pressed('Attack Down'):
+		$AttackArea2D.monitoring = true
+		#attack_direction = "Down"
+		$AttackArea2D.position.y = 100
+		$AttackArea2D/Sprite2D.visible = true
+		$AttackArea2D/AttackTimer.start()
+	else:
+		await $AttackArea2D/AttackTimer.timeout
+		$AttackArea2D/Sprite2D.visible = false
+		$AttackArea2D.position.x = 0
+		$AttackArea2D.position.y = 0
