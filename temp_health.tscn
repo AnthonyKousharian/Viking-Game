@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkcyr8sgo825t"]
+
+[ext_resource type="Texture2D" uid="uid://dl5y7n1f68ycc" path="res://icon.svg" id="1_wdoym"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rpps2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wdoym")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Temp Health" type="AnimatedSprite2D"]
+position = Vector2(32, 32)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_rpps2")
