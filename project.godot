@@ -80,10 +80,6 @@ Dash={
 ]
 }
 
-[layer_names]
-
-2d_physics/layer_1="Ground"
-
 [rendering]
 
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

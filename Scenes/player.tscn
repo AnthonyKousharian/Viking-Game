@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://2pddflqav00q"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_55xad"]
+[ext_resource type="Script" path="res://player.gd" id="1_55xad"]
 [ext_resource type="Texture2D" uid="uid://5tqvjujeptoc" path="res://Sprites/Player/Sprite-0001.png" id="2_2bt2b"]
 [ext_resource type="Texture2D" uid="uid://da8prptrbr3vv" path="res://Sprites/Player/hooded_back.png" id="2_u757t"]
 [ext_resource type="Texture2D" uid="uid://b1liwh7vyc4gj" path="res://Sprites/Player/hoodedRun.png" id="3_rpkd0"]
@@ -134,7 +134,7 @@ script = ExtResource("1_55xad")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v28n6")
-animation = &"walk"
+animation = &"hurt"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
