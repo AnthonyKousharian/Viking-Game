@@ -12,8 +12,15 @@ var SPEED = 300.0
 
 var attack_direction = "Right"
 
-var currentHealth: int = 10
+var currentHealth: int = 4
 var invincibility: bool = false
+var hearts_list: Array[TextureRect]
+
+
+func _ready() -> void:
+	var hearts_parent = $UI/HBoxContainer
+	for child in hearts_parent.get_children():
+		hearts_list.append(child)
 
 
 func _physics_process(delta: float) -> void:
@@ -107,6 +114,7 @@ func _physics_process(delta: float) -> void:
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemies") and !invincibility:
 		currentHealth-=1
+		update_heart_display()
 		$PlayerSprite.play("hurt")
 		print(currentHealth)
 		$Invincibility.one_shot = true
@@ -123,3 +131,7 @@ func _on_invincibile_timeout():
 	$Hitbox/CollisionShape2D.disabled = false
 	print("I frame end")
 	$Invincibility.is_stopped()
+	
+func update_heart_display():
+	for i in range(hearts_list.size()):
+		hearts_list[i].visible = i < currentHealth
