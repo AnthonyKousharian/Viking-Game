@@ -133,7 +133,7 @@ sprite_frames = SubResource("SpriteFrames_v28n6")
 animation = &"hurt"
 autoplay = "default"
 
-[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(1.5, 5)
 shape = SubResource("RectangleShape2D_l4uo0")
 
