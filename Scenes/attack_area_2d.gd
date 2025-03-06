@@ -3,11 +3,12 @@ extends Area2D
 
 
 func _ready() -> void:
-	monitoring = false
-	$AttackCollisionShape2D.disabled = true
+	pass
 
 
 func _process(delta: float) -> void:
-	if monitoring and get_parent().attack_direction == "Left":
-		$AttackCollisionShape2D.disabled = false
-		
+	pass
+
+
+func _on_body_entered(body: CharacterBody2D) -> void:
+	print("take_damage")

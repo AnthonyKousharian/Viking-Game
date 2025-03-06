@@ -40,15 +40,33 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Directional Attacking
+	
 	if Input.is_action_just_pressed('Attack Left'):
 		$AttackArea2D.monitoring = true
-		attack_direction = "Left"
+		#attack_direction = "Left"
+		$AttackArea2D.position.x = -100
+		$AttackArea2D/Sprite2D.visible = true
+		$AttackArea2D/AttackTimer.start()
 	elif Input.is_action_just_pressed('Attack Right'):
 		$AttackArea2D.monitoring = true
-		attack_direction = "Right"
+		#attack_direction = "Right"
+		$AttackArea2D.position.x = 100
+		$AttackArea2D/Sprite2D.visible = true
+		$AttackArea2D/AttackTimer.start()
 	elif Input.is_action_just_pressed('Attack Up'):
 		$AttackArea2D.monitoring = true
-		attack_direction = "Up"
+		#attack_direction = "Up"
+		$AttackArea2D.position.y = -100
+		$AttackArea2D/Sprite2D.visible = true
+		$AttackArea2D/AttackTimer.start()
 	elif Input.is_action_just_pressed('Attack Down'):
 		$AttackArea2D.monitoring = true
-		attack_direction = "Down"
+		#attack_direction = "Down"
+		$AttackArea2D.position.y = 100
+		$AttackArea2D/Sprite2D.visible = true
+		$AttackArea2D/AttackTimer.start()
+	else:
+		await $AttackArea2D/AttackTimer.timeout
+		$AttackArea2D/Sprite2D.visible = false
+		$AttackArea2D.position.x = 0
+		$AttackArea2D.position.y = 0
