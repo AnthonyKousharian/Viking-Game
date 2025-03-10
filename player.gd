@@ -1,6 +1,10 @@
 extends CharacterBody2D
-@onready var sprite_2d = $PlayerSprite
 
+@onready var sprite_2d = $PlayerSprite
+@onready var attack_timer: Timer = %AttackTimer
+@onready var attack_cooldown_timer: Timer = $AttackArea2D/AttackCooldownTimer
+@onready var attack_sprite_2d: Sprite2D = $AttackArea2D/Sprite2D
+@onready var attack_area_2d: Area2D = $AttackArea2D
 
 #speed should be slow and painful so it feels nice to upgrade
 #TODO: change speed to 175 once done with testing
@@ -15,6 +19,7 @@ func _ready() -> void:
 	var hearts_parent = $UI/HBoxContainer
 	for child in hearts_parent.get_children():
 		hearts_list.append(child)
+var attack_direction = "Right"
 
 
 func _physics_process(delta: float) -> void:
@@ -33,7 +38,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed('Right'):
 		sprite_2d.flip_h = false	
 	
-
 
 	# Handle up and down.
 	var ydirection = Input.get_axis("Up", "Down")
@@ -55,6 +59,47 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
+
+	# Directional Attacking
+	
+	if Input.is_action_just_pressed('Attack Left') and not $AttackArea2D.monitoring \
+	and attack_cooldown_timer.is_stopped():
+		attack_area_2d.monitoring = true
+		#attack_direction = "Left"
+		attack_area_2d.position.x = -100
+		attack_sprite_2d.visible = true
+		attack_timer.start()
+		attack_cooldown_timer.start()
+	elif Input.is_action_just_pressed('Attack Right') and not $AttackArea2D.monitoring \
+	and attack_cooldown_timer.is_stopped():
+		attack_area_2d.monitoring = true
+		#attack_direction = "Right"
+		attack_area_2d.position.x = 100
+		attack_sprite_2d.visible = true
+		attack_timer.start()
+		attack_cooldown_timer.start()
+	elif Input.is_action_just_pressed('Attack Up') and not $AttackArea2D.monitoring \
+	and attack_cooldown_timer.is_stopped():
+		attack_area_2d.monitoring = true
+		#attack_direction = "Up"
+		attack_area_2d.position.y = -100
+		attack_sprite_2d.visible = true
+		attack_timer.start()
+		attack_cooldown_timer.start()
+	elif Input.is_action_just_pressed('Attack Down') and not $AttackArea2D.monitoring \
+	and attack_cooldown_timer.is_stopped():
+		attack_area_2d.monitoring = true
+		#attack_direction = "Down"
+		attack_area_2d.position.y = 100
+		attack_sprite_2d.visible = true
+		attack_timer.start()
+		attack_cooldown_timer.start()
+	else:
+		await attack_timer.timeout
+		attack_sprite_2d.visible = false
+		attack_area_2d.monitoring = false
+		attack_area_2d.position.x = 0
+		attack_area_2d.position.y = 0
 
 
 func _on_hitbox_body_entered(body):
@@ -81,3 +126,4 @@ func _on_invincibile_timeout():
 func update_heart_display():
 	for i in range(hearts_list.size()):
 		hearts_list[i].visible = i < currentHealth
+	
