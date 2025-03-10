@@ -22,6 +22,10 @@ project/assembly_name="UnnamedProject"
 
 player=""
 
+[global_group]
+
+Enemy=""
+
 [input]
 
 Left={
