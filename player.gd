@@ -3,12 +3,12 @@ extends CharacterBody2D
 @onready var sprite_2d = $PlayerSprite
 @onready var attack_timer: Timer = %AttackTimer
 @onready var attack_cooldown_timer: Timer = $AttackArea2D/AttackCooldownTimer
-@onready var attack_sprite_2d: Sprite2D = $AttackArea2D/Sprite2D
+@onready var attack_sprite_2d: AnimatedSprite2D = $AttackArea2D/Sprite2D
 @onready var attack_area_2d: Area2D = $AttackArea2D
-
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 #speed should be slow and painful so it feels nice to upgrade
 #TODO: change speed to 175 once done with testing
-const SPEED = 300.0
+var SPEED = 300.0
 
 var attack_direction = "Right"
 
@@ -44,43 +44,51 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, 80)
 	move_and_slide()
 	
-	# Directional Attacking
+	#Dodge
+	if Input.is_action_just_pressed('Dodge'):
+		collision_shape_2d.disabled = true
+		SPEED = 1000
+	if Input.is_action_just_released('Dodge'):
+		collision_shape_2d.disabled = false
+		SPEED = 300
 	
-	if Input.is_action_just_pressed('Attack Left') and not $AttackArea2D.monitoring \
-	and attack_cooldown_timer.is_stopped():
+	# Directional Attacking
+	# the speed of the attack animation is relative to attack timer, so that the quicker you can attack
+	# the quicker the animation is
+	attack_timer.wait_time = 1
+	attack_sprite_2d.speed_scale = 1/attack_timer.wait_time
+	
+	if Input.is_action_just_pressed('Attack Left') and not $AttackArea2D.monitoring:
 		attack_area_2d.monitoring = true
 		#attack_direction = "Left"
 		attack_area_2d.position.x = -100
-		attack_sprite_2d.visible = true
+		attack_sprite_2d.rotation_degrees = 180
+		attack_sprite_2d.play("default")
 		attack_timer.start()
-		attack_cooldown_timer.start()
-	elif Input.is_action_just_pressed('Attack Right') and not $AttackArea2D.monitoring \
-	and attack_cooldown_timer.is_stopped():
+	elif Input.is_action_just_pressed('Attack Right') and not $AttackArea2D.monitoring:
 		attack_area_2d.monitoring = true
 		#attack_direction = "Right"
 		attack_area_2d.position.x = 100
-		attack_sprite_2d.visible = true
+		attack_sprite_2d.rotation_degrees = 0
+		attack_sprite_2d.play("default")
 		attack_timer.start()
-		attack_cooldown_timer.start()
-	elif Input.is_action_just_pressed('Attack Up') and not $AttackArea2D.monitoring \
-	and attack_cooldown_timer.is_stopped():
+	elif Input.is_action_just_pressed('Attack Up') and not $AttackArea2D.monitoring:
 		attack_area_2d.monitoring = true
 		#attack_direction = "Up"
 		attack_area_2d.position.y = -100
-		attack_sprite_2d.visible = true
+		attack_sprite_2d.rotation_degrees = -90
+		attack_sprite_2d.play("default")
 		attack_timer.start()
-		attack_cooldown_timer.start()
-	elif Input.is_action_just_pressed('Attack Down') and not $AttackArea2D.monitoring \
-	and attack_cooldown_timer.is_stopped():
+	elif Input.is_action_just_pressed('Attack Down') and not $AttackArea2D.monitoring:
 		attack_area_2d.monitoring = true
 		#attack_direction = "Down"
 		attack_area_2d.position.y = 100
-		attack_sprite_2d.visible = true
+		attack_sprite_2d.play("default")
+		attack_sprite_2d.rotation_degrees = 90
 		attack_timer.start()
-		attack_cooldown_timer.start()
 	else:
+		await attack_sprite_2d.animation_finished
 		await attack_timer.timeout
-		attack_sprite_2d.visible = false
 		attack_area_2d.monitoring = false
 		attack_area_2d.position.x = 0
 		attack_area_2d.position.y = 0
