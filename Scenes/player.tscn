@@ -126,6 +126,7 @@ size = Vector2(46, 48)
 gradient = SubResource("Gradient_jbgss")
 
 [node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_55xad")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
