@@ -127,7 +127,7 @@ height = 92.0
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_m8nw5"]
 gradient = SubResource("Gradient_jbgss")
 
-
+[node name="Player" type="CharacterBody2D"]
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_55xad")
 
