@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://o6dagtlued2g"]
+[gd_scene load_steps=5 format=3 uid="uid://cci2xog73qj2j"]
 
 [ext_resource type="Texture2D" uid="uid://csnhf85y6a1pk" path="res://Sprites/600px-EnemyGG_allmode.png" id="1_kd2au"]
 [ext_resource type="Script" path="res://enemyfollowing.gd" id="1_of8eb"]
@@ -17,10 +17,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_of8eb")
 
-[node name="Enemy_CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Enemy_CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemies"]]
 shape = SubResource("CircleShape2D_kreio")
 
 [node name="Enemy_AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy_CollisionShape2D"]
