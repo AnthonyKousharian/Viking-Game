@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://2pddflqav00q"]
+[gd_scene load_steps=25 format=3 uid="uid://2pddflqav00q"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_55xad"]
 [ext_resource type="Texture2D" uid="uid://5tqvjujeptoc" path="res://Sprites/Player/Sprite-0001.png" id="2_2bt2b"]
@@ -117,17 +117,18 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4uo0"]
 size = Vector2(17, 80)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ikf8l"]
+radius = 16.0
+height = 102.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wr2nh"]
-radius = 23.0
-height = 92.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k818s"]
+size = Vector2(46, 48)
 
 [sub_resource type="Gradient" id="Gradient_jbgss"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_m8nw5"]
 gradient = SubResource("Gradient_jbgss")
 
-[node name="Player" type="CharacterBody2D"]
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_55xad")
 
@@ -166,7 +167,8 @@ wait_time = 0.25
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CapsuleShape2D_wr2nh")
+position = Vector2(-1, 8)
+shape = SubResource("CapsuleShape2D_ikf8l")
 
 [node name="Invincibility" type="Timer" parent="."]
 
@@ -200,5 +202,23 @@ layout_mode = 2
 
 [node name="Temp Health" parent="UI/HBoxContainer/Health4" instance=ExtResource("6_lvigu")]
 
+[node name="AttackArea2D" type="Area2D" parent="."]
+script = ExtResource("6_jxmj3")
+
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("RectangleShape2D_k818s")
+
+[node name="Sprite2D" type="Sprite2D" parent="AttackArea2D"]
+position = Vector2(0, -1.49012e-08)
+scale = Vector2(0.71875, 0.757813)
+texture = SubResource("GradientTexture2D_m8nw5")
+
+[node name="AttackTimer" type="Timer" parent="AttackArea2D"]
+unique_name_in_owner = true
+wait_time = 0.25
+
+[node name="AttackCooldownTimer" type="Timer" parent="AttackArea2D"]
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibile_timeout"]
+[connection signal="body_entered" from="AttackArea2D" to="AttackArea2D" method="_on_body_entered"]
