@@ -21,9 +21,6 @@ project/assembly_name="UnnamedProject"
 
 player=""
 
-[global_group]
-
-player=""
 
 [input]
 

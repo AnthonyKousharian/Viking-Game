@@ -293,13 +293,13 @@ shape = SubResource("RectangleShape2D_k818s")
 [node name="Sprite2D" type="Sprite2D" parent="AttackArea2D"]
 position = Vector2(0, -1.49012e-08)
 scale = Vector2(0.71875, 0.757813)
-texture = SubResource("GradientTexture2D_m8nw5")
+sprite_frames = SubResource("SpriteFrames_f2by6")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
 
 [node name="AttackTimer" type="Timer" parent="AttackArea2D"]
 unique_name_in_owner = true
-wait_time = 0.25
-
-[node name="AttackCooldownTimer" type="Timer" parent="AttackArea2D"]
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibile_timeout"]
