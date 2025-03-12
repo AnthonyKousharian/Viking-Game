@@ -284,6 +284,23 @@ layout_mode = 2
 
 [node name="Temp Health" parent="UI/HBoxContainer/Health4" instance=ExtResource("6_lvigu")]
 
+[node name="AttackArea2D" type="Area2D" parent="."]
+script = ExtResource("6_jxmj3")
+
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("RectangleShape2D_k818s")
+
+[node name="Sprite2D" type="Sprite2D" parent="AttackArea2D"]
+position = Vector2(0, -1.49012e-08)
+scale = Vector2(0.71875, 0.757813)
+texture = SubResource("GradientTexture2D_m8nw5")
+
+[node name="AttackTimer" type="Timer" parent="AttackArea2D"]
+unique_name_in_owner = true
+wait_time = 0.25
+
+[node name="AttackCooldownTimer" type="Timer" parent="AttackArea2D"]
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibile_timeout"]
 [connection signal="body_entered" from="AttackArea2D" to="AttackArea2D" method="_on_body_entered"]
