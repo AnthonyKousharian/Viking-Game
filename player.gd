@@ -58,48 +58,13 @@ func _physics_process(delta: float) -> void:
 		$Hitbox/CollisionShape2D.disabled = true
 		
 	move_and_slide()
-
-
-
-func _on_hitbox_body_entered(body):
-	if body.is_in_group("enemies") and !invincibility:
-		currentHealth-=1
-		update_heart_display()
-		$PlayerSprite.play("hurt")
-		print(currentHealth)
-		$Invincibility.one_shot = true
-		$Invincibility.start()
+	
+	#Dodge
+	if Input.is_action_just_pressed('Dodge'):
 		invincibility = true
-	if currentHealth <= 0:
-		get_tree().change_scene_to_file("res://end_screen.tscn")
-		
-
-
-func _on_invincibile_timeout():
-	invincibility = false
-	$CollisionShape2D.disabled = false
-	$Hitbox/CollisionShape2D.disabled = false
-	print("I frame end")
-	$Invincibility.is_stopped()
-	
-func update_heart_display():
-	for i in range(hearts_list.size()):
-		hearts_list[i].visible = i < currentHealth
-	
-	#Dodge
-	if Input.is_action_just_pressed('Dodge'):
-		collision_shape_2d.disabled = true
 		SPEED = 1000
 	if Input.is_action_just_released('Dodge'):
-		collision_shape_2d.disabled = false
-		SPEED = 300
-	
-	#Dodge
-	if Input.is_action_just_pressed('Dodge'):
-		collision_shape_2d.disabled = true
-		SPEED = 1000
-	if Input.is_action_just_released('Dodge'):
-		collision_shape_2d.disabled = false
+		invincibility = false
 		SPEED = 300
 	
 	# Directional Attacking
@@ -142,3 +107,30 @@ func update_heart_display():
 		attack_area_2d.monitoring = false
 		attack_area_2d.position.x = 0
 		attack_area_2d.position.y = 0
+
+
+
+func _on_hitbox_body_entered(body):
+	if body.is_in_group("enemies") and !invincibility:
+		currentHealth-=1
+		update_heart_display()
+		$PlayerSprite.play("hurt")
+		print(currentHealth)
+		$Invincibility.one_shot = true
+		$Invincibility.start()
+		invincibility = true
+	if currentHealth <= 0:
+		get_tree().change_scene_to_file("res://end_screen.tscn")
+		
+
+
+func _on_invincibile_timeout():
+	invincibility = false
+	$CollisionShape2D.disabled = false
+	$Hitbox/CollisionShape2D.disabled = false
+	print("I frame end")
+	$Invincibility.is_stopped()
+	
+func update_heart_display():
+	for i in range(hearts_list.size()):
+		hearts_list[i].visible = i < currentHealth	
