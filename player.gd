@@ -61,10 +61,10 @@ func _physics_process(delta: float) -> void:
 	
 	#Dodge
 	if Input.is_action_just_pressed('Dodge'):
-		collision_shape_2d.disabled = true
+		invincibility = true
 		SPEED = 1000
 	if Input.is_action_just_released('Dodge'):
-		collision_shape_2d.disabled = false
+		invincibility = false
 		SPEED = 300
 	
 	# Directional Attacking
