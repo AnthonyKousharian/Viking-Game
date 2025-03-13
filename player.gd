@@ -94,6 +94,14 @@ func update_heart_display():
 		collision_shape_2d.disabled = false
 		SPEED = 300
 	
+	#Dodge
+	if Input.is_action_just_pressed('Dodge'):
+		collision_shape_2d.disabled = true
+		SPEED = 1000
+	if Input.is_action_just_released('Dodge'):
+		collision_shape_2d.disabled = false
+		SPEED = 300
+	
 	# Directional Attacking
 	# the speed of the attack animation is relative to attack timer, so that the quicker you can attack
 	# the quicker the animation is

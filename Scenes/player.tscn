@@ -233,6 +233,117 @@ frame_progress = 1.0
 
 [node name="AttackTimer" type="Timer" parent="AttackArea2D"]
 unique_name_in_owner = true
+wait_time = 0.25
+
+[node name="AttackCooldownTimer" type="Timer" parent="AttackArea2D"]
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Invincibility" to="." method="_on_invincibile_timeout"]
+[connection signal="body_entered" from="AttackArea2D" to="AttackArea2D" method="_on_body_entered"]
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1, 8)
+shape = SubResource("CapsuleShape2D_ikf8l")
+
+[node name="Invincibility" type="Timer" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health" instance=ExtResource("6_lvigu")]
+
+[node name="Health2" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health2" instance=ExtResource("6_lvigu")]
+
+[node name="Health3" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health3" instance=ExtResource("6_lvigu")]
+
+[node name="Health4" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health4" instance=ExtResource("6_lvigu")]
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+script = ExtResource("6_jxmj3")
+
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("RectangleShape2D_k818s")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="AttackArea2D"]
+texture_filter = 1
+position = Vector2(0, -1.49012e-08)
+scale = Vector2(0.71875, 0.757813)
+sprite_frames = SubResource("SpriteFrames_f2by6")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+
+[node name="AttackTimer" type="Timer" parent="AttackArea2D"]
+unique_name_in_owner = true
+
+[node name="Invincibility" type="Timer" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health" instance=ExtResource("6_lvigu")]
+
+[node name="Health2" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health2" instance=ExtResource("6_lvigu")]
+
+[node name="Health3" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health3" instance=ExtResource("6_lvigu")]
+
+[node name="Health4" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health4" instance=ExtResource("6_lvigu")]
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+script = ExtResource("6_jxmj3")
+
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("RectangleShape2D_k818s")
+
+[node name="Sprite2D" type="Sprite2D" parent="AttackArea2D"]
+position = Vector2(0, -1.49012e-08)
+scale = Vector2(0.71875, 0.757813)
+sprite_frames = SubResource("SpriteFrames_f2by6")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+
+[node name="AttackTimer" type="Timer" parent="AttackArea2D"]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibile_timeout"]
