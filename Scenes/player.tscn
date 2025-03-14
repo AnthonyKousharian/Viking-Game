@@ -1,10 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://2pddflqav00q"]
+[gd_scene load_steps=27 format=3 uid="uid://2pddflqav00q"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_55xad"]
 [ext_resource type="Texture2D" uid="uid://5tqvjujeptoc" path="res://Sprites/Player/Sprite-0001.png" id="2_2bt2b"]
 [ext_resource type="Texture2D" uid="uid://da8prptrbr3vv" path="res://Sprites/Player/hooded_back.png" id="2_u757t"]
 [ext_resource type="Texture2D" uid="uid://b1liwh7vyc4gj" path="res://Sprites/Player/hoodedRun.png" id="3_rpkd0"]
 [ext_resource type="Texture2D" uid="uid://l06enaty1dr5" path="res://Sprites/Player/hooded_hurt.png" id="4_xv7vy"]
+[ext_resource type="Script" path="res://Scenes/attack_area_2d.gd" id="6_jxmj3"]
+[ext_resource type="PackedScene" uid="uid://dkcyr8sgo825t" path="res://temp_health.tscn" id="6_lvigu"]
+[ext_resource type="Texture2D" uid="uid://c1ycupsakda8s" path="res://Sprites/UIsprites/SlashAnimation.png" id="7_5g81i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6oqv"]
 atlas = ExtResource("2_2bt2b")
@@ -115,17 +118,51 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4uo0"]
 size = Vector2(17, 80)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ikf8l"]
+radius = 16.0
+height = 102.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k818s"]
 size = Vector2(46, 48)
 
-[sub_resource type="Gradient" id="Gradient_jbgss"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dipv3"]
+atlas = ExtResource("7_5g81i")
+region = Rect2(0, 0, 128, 100)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_m8nw5"]
-gradient = SubResource("Gradient_jbgss")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ml3a"]
+atlas = ExtResource("7_5g81i")
+region = Rect2(128, 0, 128, 100)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wr2nh"]
 radius = 23.0
 height = 92.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvflx"]
+atlas = ExtResource("7_5g81i")
+region = Rect2(256, 0, 128, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tovew"]
+atlas = ExtResource("7_5g81i")
+region = Rect2(384, 0, 128, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f2by6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dipv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ml3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvflx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tovew")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_55xad")
@@ -143,3 +180,63 @@ shape = SubResource("RectangleShape2D_l4uo0")
 [node name="PlayerCam" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1, 8)
+shape = SubResource("CapsuleShape2D_ikf8l")
+
+[node name="Invincibility" type="Timer" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health" instance=ExtResource("6_lvigu")]
+
+[node name="Health2" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health2" instance=ExtResource("6_lvigu")]
+
+[node name="Health3" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health3" instance=ExtResource("6_lvigu")]
+
+[node name="Health4" type="TextureRect" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Temp Health" parent="UI/HBoxContainer/Health4" instance=ExtResource("6_lvigu")]
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+script = ExtResource("6_jxmj3")
+
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("RectangleShape2D_k818s")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="AttackArea2D"]
+texture_filter = 1
+position = Vector2(0, -1.49012e-08)
+scale = Vector2(0.71875, 0.757813)
+sprite_frames = SubResource("SpriteFrames_f2by6")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+
+[node name="AttackTimer" type="Timer" parent="AttackArea2D"]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Invincibility" to="." method="_on_invincibile_timeout"]
+[connection signal="body_entered" from="AttackArea2D" to="AttackArea2D" method="_on_body_entered"]
