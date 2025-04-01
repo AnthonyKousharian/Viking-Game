@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite_2d = $PlayerSprite
 @onready var attack_timer: Timer = %AttackTimer
-@onready var attack_cooldown_timer: Timer = $AttackArea2D/AttackCooldownTimer
+@onready var attack_cooldown_timer: Timer = $AttackArea2D/AttackCooldownTimer  
 @onready var attack_sprite_2d: AnimatedSprite2D = $AttackArea2D/Sprite2D
 @onready var attack_area_2d: Area2D = $AttackArea2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
