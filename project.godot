@@ -10,6 +10,7 @@ config_version=5
 
 [application]
 
+config/name="Farming Game"
 run/main_scene="res://Scenes/Farmland.tscn"
 config/features=PackedStringArray("4.3")
 
