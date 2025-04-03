@@ -26,3 +26,5 @@ shape = SubResource("CircleShape2D_kreio")
 [node name="Enemy_AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy_CollisionShape2D"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_wkdm7")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
