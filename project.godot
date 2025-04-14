@@ -21,6 +21,7 @@ project/assembly_name="UnnamedProject"
 [global_group]
 
 player=""
+Enemy=""
 
 [input]
 
