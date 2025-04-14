@@ -15,7 +15,7 @@ var SPEED = 300.0
 
 var playerRagDoll: bool = false
 
-var currentHealth: int = 4
+var currentHealth: int = 300
 var invincibility: bool = false
 var hearts_list: Array[TextureRect]
 
