@@ -17,7 +17,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy", "enemies"]]
 script = ExtResource("1_of8eb")
 
 [node name="Enemy_CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemies"]]
@@ -26,3 +26,5 @@ shape = SubResource("CircleShape2D_kreio")
 [node name="Enemy_AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy_CollisionShape2D"]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_wkdm7")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
