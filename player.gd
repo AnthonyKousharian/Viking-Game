@@ -65,6 +65,8 @@ func _physics_process(delta: float) -> void:
 		SPEED = 1000
 	if Input.is_action_just_released('Dodge'):
 		invincibility = false
+		$CollisionShape2D.disabled = false
+		$Hitbox/CollisionShape2D.disabled = false
 		SPEED = 300
 	
 	# Directional Attacking
@@ -120,7 +122,7 @@ func _on_hitbox_body_entered(body):
 		$Invincibility.start()
 		invincibility = true
 	if currentHealth <= 0:
-		get_tree().change_scene_to_file("res://end_screen.tscn")
+		get_tree().change_scene_to_file("res://Scenes/end_screen.tscn")
 		
 
 
