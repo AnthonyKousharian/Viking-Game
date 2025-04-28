@@ -192,8 +192,10 @@ wait_time = 0.2
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 295.0
+offset_bottom = 44.0
 
 [node name="Health" type="TextureRect" parent="UI/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
