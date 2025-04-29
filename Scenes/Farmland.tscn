@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cci2xog73qj2j" path="res://Scenes/enemy.tscn" id="5_2f7h8"]
 [ext_resource type="Script" path="res://Scripts/test_age_button.gd" id="6_ge6rk"]
 [ext_resource type="PackedScene" uid="uid://dnol63gt2xr3l" path="res://Scenes/UI Stuff/health_bar.tscn" id="8_sajeu"]
+[ext_resource type="Script" path="res://Scenes/enemy_spawner.gd" id="5_ansv0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bwdh"]
 texture = ExtResource("2_kv58d")
@@ -222,6 +223,11 @@ texture = ExtResource("3_2631t")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_jqr8j")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_r01nn"]
+vertices = PackedVector2Array(1204.82, 691.898, 1.14062, 681.094, 10.8516, 8.96094, 1193.16, 5.03125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1, -1, 1203, -5, 1215, 702, -9, 691)])
+
 [node name="Node2D" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
@@ -239,7 +245,7 @@ tile_set = SubResource("TileSet_n7m5b")
 [node name="Crops" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_8i2rj")]
-position = Vector2(212, 74)
+position = Vector2(288, 287)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
@@ -271,3 +277,20 @@ offset_bottom = 40.0
 
 [node name="Health Bar" parent="UI" instance=ExtResource("8_sajeu")]
 layout_mode = 0
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(6, -8)
+navigation_polygon = SubResource("NavigationPolygon_r01nn")
+
+[node name="SpawnZone" type="Marker2D" parent="."]
+position = Vector2(1088, 153)
+
+[node name="Enemy Spawner" type="Node" parent="." node_paths=PackedStringArray("spawn_zone")]
+script = ExtResource("5_ansv0")
+enemy_scene = ExtResource("5_2f7h8")
+spawn_zone = NodePath("../SpawnZone")
+
+[node name="WaveButton" type="Button" parent="Enemy Spawner"]
+offset_left = -266.0
+offset_top = -2.0
+offset_right = -176.0
+offset_bottom = 29.0
