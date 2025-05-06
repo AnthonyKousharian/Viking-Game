@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://demfr7hvdykfj"]
+[gd_scene load_steps=7 format=3 uid="uid://cfknmanu0vm6j"]
 
 [ext_resource type="Texture2D" uid="uid://be6cleft0jvqj" path="res://Sprites/Crops/AllWheatStages.png" id="1_b715v"]
+[ext_resource type="Script" path="res://Scenes/Crops/Wheat/seeds.gd" id="1_yptmd"]
 [ext_resource type="Script" path="res://Scripts/ageing_script.gd" id="2_xso7u"]
+[ext_resource type="PackedScene" uid="uid://c5s2qk5irajl7" path="res://Scenes/Crops/Wheat/wheat_growth_1.tscn" id="3_o3d7v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wrn3p"]
 atlas = ExtResource("1_b715v")
@@ -11,6 +13,7 @@ region = Rect2(0, 32, 64, 64)
 size = Vector2(64, 64)
 
 [node name="WheatSeeds" type="Area2D"]
+script = ExtResource("1_yptmd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -19,5 +22,6 @@ texture = SubResource("AtlasTexture_wrn3p")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u4hmf")
 
-[node name="Ageing" type="Node" parent="."]
+[node name="AgeingComponent" type="Node" parent="."]
 script = ExtResource("2_xso7u")
+next_stage = ExtResource("3_o3d7v")
