@@ -2,17 +2,24 @@ extends CharacterBody2D
 
 @onready var sprite_2d = $PlayerSprite
 @onready var attack_timer: Timer = %AttackTimer
-@onready var attack_cooldown_timer: Timer = $AttackArea2D/AttackCooldownTimer
+@onready var attack_cooldown_timer: Timer = $AttackArea2D/AttackCooldownTimer  
 @onready var attack_sprite_2d: AnimatedSprite2D = $AttackArea2D/Sprite2D
 @onready var attack_area_2d: Area2D = $AttackArea2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 #speed should be slow and painful so it feels nice to upgrade
 #TODO: change speed to 175 once done with testing
+
+@export var knockbackPower: int = 1000
+
 var SPEED = 300.0
+
+var playerRagDoll: bool = false
 
 var currentHealth: int = 4
 var invincibility: bool = false
 var hearts_list: Array[TextureRect]
+
+
 
 
 func _ready() -> void:
@@ -23,35 +30,36 @@ var attack_direction = "Right"
 
 
 func _physics_process(delta: float) -> void:
-	if((velocity.x > 1 || velocity.x < -1 || velocity.y > 1) && !velocity.y < -1):
-		sprite_2d.animation = "walk"
-	elif(velocity.y < -1):
-		sprite_2d.animation = "back"
-	else:
-		sprite_2d.animation = "default"
+	if !playerRagDoll:
+		if((velocity.x > 1 || velocity.x < -1 || velocity.y > 1) && !velocity.y < -1):
+			sprite_2d.animation = "walk"
+		elif(velocity.y < -1):
+			sprite_2d.animation = "back"
+		else:
+			sprite_2d.animation = "default"
 		
 	
 	
-	# To Stay looking left or right
-	if Input.is_action_just_pressed('Left'):
-		sprite_2d.flip_h = true
-	if Input.is_action_just_pressed('Right'):
-		sprite_2d.flip_h = false	
-	
+		# To Stay looking left or right
+		if Input.is_action_just_pressed('Left'):
+			sprite_2d.flip_h = true
+		if Input.is_action_just_pressed('Right'):
+			sprite_2d.flip_h = false	
+		
 
-	# Handle up and down.
-	var ydirection = Input.get_axis("Up", "Down")
-	if ydirection:
-		velocity.y = ydirection * SPEED
-	else:
-		velocity.y = move_toward(velocity.y, 0, 80)
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("Left", "Right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, 80)
+		# Handle up and down.
+		var ydirection = Input.get_axis("Up", "Down")
+		if ydirection:
+			velocity.y = ydirection * SPEED
+		else:
+			velocity.y = move_toward(velocity.y, 0, 80)
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction = Input.get_axis("Left", "Right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, 80)
 		
 	if invincibility: 
 		$CollisionShape2D.disabled = true
@@ -115,6 +123,11 @@ func _physics_process(delta: float) -> void:
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemies") and !invincibility:
 		currentHealth-=1
+		$Knockback.one_shot = true
+		$Knockback.start()
+		sprite_2d.play("hurt")
+		playerRagDoll = true
+		knockback(body.get_parent().get_node(body.get_path()).velocity)
 		update_heart_display()
 		$PlayerSprite.play("hurt")
 		print(currentHealth)
@@ -136,3 +149,13 @@ func _on_invincibile_timeout():
 func update_heart_display():
 	for i in range(hearts_list.size()):
 		hearts_list[i].visible = i < currentHealth	
+		
+func knockback(enemyVelocity: Vector2):
+	var knockbackDirection = (enemyVelocity).normalized() * knockbackPower
+	velocity = knockbackDirection
+	
+
+
+func _on_knockback_timeout():
+	playerRagDoll = false
+	$Knockback.is_stopped()
