@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://df6nnga1svclt"]
+[gd_scene load_steps=3 format=3 uid="uid://df6nnga1svclt"]
+
+[ext_resource type="Script" path="res://Scripts/player_inventory.gd" id="1_ahmb2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26onc"]
+bg_color = Color(0.351298, 0.114613, 0.0201749, 1)
 
 [node name="PlayerInventory" type="Control"]
 layout_mode = 3
@@ -7,3 +12,52 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ahmb2")
+
+[node name="HotbarPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -296.0
+offset_top = -95.0
+offset_right = 296.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_26onc")
+
+[node name="HotBarHContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -293.5
+offset_top = -96.0
+offset_right = 293.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HotBarItemHContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -293.5
+offset_top = -96.0
+offset_right = 293.5
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="DescriptionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 537.0
+offset_top = 527.0
+offset_right = 620.0
+offset_bottom = 552.0

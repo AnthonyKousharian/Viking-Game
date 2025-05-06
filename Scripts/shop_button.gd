@@ -1,12 +1,15 @@
-extends Button
+extends CanvasLayer
 
-@onready var v_box_container: VBoxContainer = $"../VBoxContainer"
-@onready var description_label: Label = $"../DescriptionLabel"
+@onready var v_box_container: VBoxContainer = $"VBoxContainer"
+@onready var description_label: Label = $"DescriptionLabel"
+@onready var texture_rect: TextureRect = $"TextureRect"
 
 
 const BOAT_PART = preload("res://Resources/ShopItems/BoatPart.tres")
 const WHEAT_SEEDS = preload("res://Resources/ShopItems/WheatSeeds.tres")
 const HP_RUNE = preload("res://Resources/ShopItems/HPRune.tres")
+
+signal item_bought(item:Resource,amount_of_item:int)
 
 var amount_of_items = 3
 var items_array = []
@@ -26,7 +29,8 @@ func _ready() -> void:
 		v_box_container.add_child(item_button)
 		item_button.mouse_entered.connect(_on_item_button_entered.bind(item_button,item))
 		item_button.pressed.connect(_on_item_button_pressed.bind(item_button,item))
-
+	
+	
 func _process(delta: float) -> void:
 	pass
 
@@ -36,8 +40,10 @@ func _on_item_button_entered(item_button: Button, item: Resource) -> void:
 func _on_item_button_pressed(item_button: Button, item: Resource) -> void:
 	if Input.is_action_pressed("Dodge"):
 		item.itemStock = item.itemStock - 10
+		item_bought.emit(item, 10)
 	else:
 		item.itemStock = item.itemStock - 1
+		item_bought.emit(item, 1)
 	if item.itemStock == 0:
 		item_button.text = "SOLD OUT"
 		item_button.disabled = true

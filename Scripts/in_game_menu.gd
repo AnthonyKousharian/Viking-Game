@@ -17,6 +17,14 @@ func _ready() -> void:
 	
 	#accesses the setting file so that it can turn it into settings
 	var r = FileAccess.open("user://settings.dat", FileAccess.READ)
+	
+	if r == null:
+		var f = FileAccess.open("user://settings.dat", FileAccess.WRITE)
+		var json_string = JSON.stringify(data)
+		f.store_string(JSON.stringify(data))
+		f.close()
+		r = FileAccess.open("user://settings.dat", FileAccess.READ)
+		
 	if r.get_as_text().length() > 0:
 		_turn_text_into_settings(r.get_as_text())
 
@@ -46,8 +54,6 @@ func _on_option_button_item_selected(index: int) -> void:
 func _on_close_button_pressed() -> void:
 	settings_menu_box.visible = false
 	settings_v_container.visible = false
-	
-	Engine.max_fps = fps_limit_slider.value
 	
 	#updates dictionary to values that were just changed, so that when we save we have them
 	data = {
