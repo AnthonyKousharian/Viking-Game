@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpxmq0biqo6ri"]
+
+[ext_resource type="Script" path="res://day_night_cycle_ui.gd" id="1_jgmjc"]
+
+[node name="DayNightCycleUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jgmjc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DayLabelBackground" type="Label" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DayLabel" type="Label" parent="CenterContainer/DayLabelBackground"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TimeLabelBackground" type="Label" parent="CenterContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="CenterContainer2/TimeLabelBackground"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
