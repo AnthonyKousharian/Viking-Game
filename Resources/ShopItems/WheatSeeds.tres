@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=2 format=3 uid="uid://bvgu202r8b1fw"]
+
+[ext_resource type="Script" path="res://Scripts/shopItem.gd" id="1_h6l4v"]
+
+[resource]
+script = ExtResource("1_h6l4v")
+itemName = "Wheat Seeds"
+itemPrice = 50
+itemDescription = "Wheat Seeds"
+itemStock = -1
