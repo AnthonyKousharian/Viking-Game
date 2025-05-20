@@ -1,6 +1,7 @@
 [gd_scene load_steps=27 format=4 uid="uid://blsxklxwwpjul"]
 
-[ext_resource type="PackedScene" uid="uid://2pddflqav00q" path="res://Scenes/player.tscn" id="1_8i2rj"]
+[ext_resource type="PackedScene" uid="uid://b8i3rxqikw2rk" path="res://Scenes/player.tscn" id="1_8i2rj"]
+[ext_resource type="Script" path="res://Scenes/farmland.gd" id="1_txdqd"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_f21rn"]
 [ext_resource type="Script" path="res://Scenes/farmland.gd" id="1_txdqd"]
 [ext_resource type="Script" path="res://Scripts/seed_manager.gd" id="2_gp011"]
@@ -16,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cpxmq0biqo6ri" path="res://day_night_cycle_ui.tscn" id="9_s68am"]
 [ext_resource type="PackedScene" uid="uid://bq5ku8win4vmf" path="res://wall.tscn" id="14_tm7iy"]
 [ext_resource type="Texture2D" uid="uid://bnuejk1a275v4" path="res://Boat.png" id="15_tasww"]
+[ext_resource type="PackedScene" uid="uid://bg8vqeiytwn5p" path="res://Scenes/SellBin.tscn" id="10_6uchf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bwdh"]
 texture = ExtResource("2_kv58d")
@@ -418,3 +420,7 @@ frame_progress = 0.311241
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="Interactables" type="Node2D" parent="."]
+
+[node name="SellBin" parent="Interactables" instance=ExtResource("10_6uchf")]
+position = Vector2(1312, 64)

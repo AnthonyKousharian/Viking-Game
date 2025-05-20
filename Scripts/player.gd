@@ -74,28 +74,28 @@ func _physics_process(delta: float) -> void:
 	attack_timer.wait_time = 1
 	attack_sprite_2d.speed_scale = 1/attack_timer.wait_time
 	
-	if Input.is_action_just_pressed('Attack Left') and not $AttackArea2D.monitoring:
+	if Input.is_action_just_pressed('Attack Left') and not attack_area_2d.monitoring:
 		attack_area_2d.monitoring = true
 		#attack_direction = "Left"
 		attack_area_2d.position.x = -100
 		attack_sprite_2d.rotation_degrees = 180
 		attack_sprite_2d.play("default")
 		attack_timer.start()
-	elif Input.is_action_just_pressed('Attack Right') and not $AttackArea2D.monitoring:
+	elif Input.is_action_just_pressed('Attack Right') and not attack_area_2d.monitoring:
 		attack_area_2d.monitoring = true
 		#attack_direction = "Right"
 		attack_area_2d.position.x = 100
 		attack_sprite_2d.rotation_degrees = 0
 		attack_sprite_2d.play("default")
 		attack_timer.start()
-	elif Input.is_action_just_pressed('Attack Up') and not $AttackArea2D.monitoring:
+	elif Input.is_action_just_pressed('Attack Up') and not attack_area_2d.monitoring:
 		attack_area_2d.monitoring = true
 		#attack_direction = "Up"
 		attack_area_2d.position.y = -100
 		attack_sprite_2d.rotation_degrees = -90
 		attack_sprite_2d.play("default")
 		attack_timer.start()
-	elif Input.is_action_just_pressed('Attack Down') and not $AttackArea2D.monitoring:
+	elif Input.is_action_just_pressed('Attack Down') and not attack_area_2d.monitoring:
 		attack_area_2d.monitoring = true
 		#attack_direction = "Down"
 		attack_area_2d.position.y = 100
@@ -115,7 +115,7 @@ func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemies") and !invincibility:
 		currentHealth-=1
 		update_heart_display()
-		$PlayerSprite.play("hurt")
+		sprite_2d.play("hurt")
 		print(currentHealth)
 		$Invincibility.one_shot = true
 		$Invincibility.start()

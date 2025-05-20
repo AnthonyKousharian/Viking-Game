@@ -1,12 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkcyr8sgo825t"]
+[gd_scene load_steps=6 format=3 uid="uid://dkcyr8sgo825t"]
 
-[ext_resource type="Texture2D" uid="uid://dl5y7n1f68ycc" path="res://icon.svg" id="1_wdoym"]
+[ext_resource type="Texture2D" uid="uid://b601r0fken0b1" path="res://Sprites/UIsprites/AlgizHP.png" id="1_e6rxj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vggik"]
+atlas = ExtResource("1_e6rxj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yobqh"]
+atlas = ExtResource("1_e6rxj")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jew3f"]
+atlas = ExtResource("1_e6rxj")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rpps2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_wdoym")
+"texture": SubResource("AtlasTexture_vggik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yobqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jew3f")
 }],
 "loop": true,
 "name": &"default",
@@ -14,6 +32,7 @@ animations = [{
 }]
 
 [node name="Temp Health" type="AnimatedSprite2D"]
-position = Vector2(32, 32)
-scale = Vector2(0.5, 0.5)
+texture_filter = 1
+position = Vector2(36, 40)
+scale = Vector2(1.125, 1)
 sprite_frames = SubResource("SpriteFrames_rpps2")
