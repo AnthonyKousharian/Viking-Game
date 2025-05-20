@@ -3,9 +3,13 @@ var seed_dict: Dictionary = {}
 var age_on_press:float = 1.0
 @onready var ground: TileMapLayer = %Ground
 
+const WHEAT = preload("res://Resources/ShopItems/Wheat.tres")
+
+signal item_bought(item:Resource,amount_of_item:int)
+
 func _ready() -> void:
 	pass
-
+	
 func _process(delta: float) -> void:
 	pass
 	
@@ -30,6 +34,7 @@ func full_grown_harvest(location: Vector2i) -> bool:
 	if location in seed_dict and seed_dict[location].full_grown:
 		seed_dict[location].queue_free()
 		unregister(location)
+		item_bought.emit(WHEAT,1)
 		return true
 	else:
 		return false 

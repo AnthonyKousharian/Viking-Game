@@ -8,6 +8,8 @@ extends Node
 @onready var crops: Node = $"../Crops"
 @onready var seed_manager: Node = $"../SeedManager"
 
+const WHEAT_SEEDS = preload("res://Resources/ShopItems/WheatSeeds.tres")
+
 #Healthbar UI
 #TODO: put the camra into main scene and 
 @onready var health_bar = "res://Scenes/UI Stuff/health_bar.tscn"
@@ -15,16 +17,14 @@ extends Node
 
 #TODO: create more of a visual tell when placing seeds 
 #TODO: fix draw placement of crops (coords of player should be at feet?)
-#TODO:placement is finicky, add leniency/larger planting hitbox
+#TODO: placement is finicky, add leniency/larger planting hitbox
 func place_seeds():
 	#coords is getting player position translating them to tilemap
 	var coords = ground.local_to_map(ground.to_local(player.global_position))#tile coords
 	var local_coords = ground.map_to_local(coords)#tilemap position using gridsnap
-	
-	
 	#check player pos. and current ground if it's plantable 
 	var data = ground.get_cell_tile_data(coords)#tile data at the prev. coords
-	if data and data.get_custom_data("is_plot") and !data.get_custom_data("has_plant"):
+	if data and data.get_custom_data("is_plot") and !data.get_custom_data("has_plant") and get_parent()._takeInventoryItem(WHEAT_SEEDS):
 		
 		#instatiate wheat seeds
 		var seedsinstance = seeds.instantiate()
@@ -36,10 +36,8 @@ func place_seeds():
 		if  !data.get_custom_data("is_watered"):
 			ground.set_cell(coords, 5, Vector2i(4,4))#makes ground unplantable(dry tile)
 		if data.get_custom_data("is_watered"):
-			ground.set_cell(coords, 5, Vector2i(4,3))#makes ground unplantable(wet  tile)
+			ground.set_cell(coords, 5, Vector2i(4,3))#makes ground unplantable(wet tile)
 			
-		
-
 
 
 

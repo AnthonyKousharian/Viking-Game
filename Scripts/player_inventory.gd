@@ -26,12 +26,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func updateInventory():
+	for item in hot_bar_dictionary:
+		hot_bar_item_h_container.get_node(item.itemName).text = item.itemName + "\n" + str(hot_bar_dictionary.get(item))
+		if hot_bar_dictionary[item] == 0:
+			hot_bar_dictionary.erase(item)
+			hot_bar_item_h_container.get_node(item.itemName).queue_free()
 func _on_item_button_entered(item_button: Button, item: Resource) -> void:
 	description_label.text = item.itemDescription + "\n"
-
-
-func _find_in_inventory() -> int:
-	return 0
 
 func _on_item_bought(item: Resource, num: int):
 
