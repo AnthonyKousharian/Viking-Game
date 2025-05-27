@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://2pddflqav00q"]
+[gd_scene load_steps=29 format=3 uid="uid://b8i3rxqikw2rk"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_55xad"]
 [ext_resource type="Texture2D" uid="uid://5tqvjujeptoc" path="res://Sprites/Player/Sprite-0001.png" id="2_2bt2b"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b1liwh7vyc4gj" path="res://Sprites/Player/hoodedRun.png" id="3_rpkd0"]
 [ext_resource type="Texture2D" uid="uid://l06enaty1dr5" path="res://Sprites/Player/hooded_hurt.png" id="4_xv7vy"]
 [ext_resource type="Script" path="res://Scripts/attack_area_2d.gd" id="6_jxmj3"]
-[ext_resource type="PackedScene" uid="uid://dkcyr8sgo825t" path="res://temp_health.tscn" id="6_lvigu"]
+[ext_resource type="PackedScene" path="res://temp_health.tscn" id="6_lvigu"]
 [ext_resource type="Texture2D" uid="uid://c1ycupsakda8s" path="res://Sprites/UIsprites/SlashAnimation.png" id="7_5g81i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6oqv"]
@@ -190,10 +190,13 @@ shape = SubResource("CapsuleShape2D_ikf8l")
 wait_time = 0.2
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 295.0
+offset_bottom = 44.0
 
 [node name="Health" type="TextureRect" parent="UI/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)

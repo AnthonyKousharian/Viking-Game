@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=2 format=3 uid="uid://4jyivirha466"]
+
+[ext_resource type="Script" path="res://Scripts/shopItem.gd" id="1_18p4k"]
+
+[resource]
+script = ExtResource("1_18p4k")
+itemName = "Wheat"
+itemPrice = 60
+itemDescription = "Wheat harvested, sell it for money."
+itemStock = 0
