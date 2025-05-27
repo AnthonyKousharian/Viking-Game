@@ -4,49 +4,24 @@
 
 [node name="DayNightCycleUI" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
 grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_jgmjc")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DayLabelBackground" type="Label" parent="CenterContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="DayLabel" type="Label" parent="CenterContainer/DayLabelBackground"]
+[node name="TimeLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -576.0
+offset_top = 53.0
+offset_right = -536.0
+offset_bottom = 76.0
 
-[node name="CenterContainer2" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TimeLabelBackground" type="Label" parent="CenterContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="TimeLabel" type="Label" parent="CenterContainer2/TimeLabelBackground"]
+[node name="DayLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Arrow" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -576.0
+offset_top = 32.0
+offset_right = -536.0
+offset_bottom = 55.0

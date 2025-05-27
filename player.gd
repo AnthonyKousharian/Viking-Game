@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var attack_sprite_2d: AnimatedSprite2D = $AttackArea2D/Sprite2D
 @onready var attack_area_2d: Area2D = $AttackArea2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var hitbox_area: Area2D = $Hitbox
 #speed should be slow and painful so it feels nice to upgrade
 #TODO: change speed to 175 once done with testing
 
@@ -18,7 +19,8 @@ var playerRagDoll: bool = false
 var currentHealth: int = 300
 var invincibility: bool = false
 var hearts_list: Array[TextureRect]
-
+var dashing: bool = false
+var onCooldown: bool = false
 
 
 
@@ -61,19 +63,18 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, 80)
 		
-	if invincibility: 
-		$CollisionShape2D.disabled = true
-		$Hitbox/CollisionShape2D.disabled = true
-		
+	
 	move_and_slide()
 	
+	
 	#Dodge
-	if Input.is_action_just_pressed('Dodge'):
-		invincibility = true
-		SPEED = 1000
-	if Input.is_action_just_released('Dodge'):
-		invincibility = false
-		SPEED = 300
+	if Input.is_action_just_pressed('Dodge') and !onCooldown:
+		dashing = true
+		$Dashing.one_shot = true
+		$Dashing.start()
+		SPEED = 3000
+		$DashingCooldown.start()
+		
 	
 	# Directional Attacking
 	# the speed of the attack animation is relative to attack timer, so that the quicker you can attack
@@ -116,10 +117,14 @@ func _physics_process(delta: float) -> void:
 		attack_area_2d.position.x = 0
 		attack_area_2d.position.y = 0
 
-
+func update_collision_mask():
+		if invincibility:
+			collision_mask = 1 << 3  # Only collide with Layer 3 (walls)
+		else:
+			collision_mask = (1 << 2) | (1 << 3)  # Collide with enemies (Layer 2) and walls (Layer 3)
 
 func _on_hitbox_body_entered(body):
-	if body.is_in_group("enemies") and !invincibility:
+	if body.is_in_group("enemies") and !invincibility and !dashing:
 		currentHealth-=1
 		$Knockback.one_shot = true
 		$Knockback.start()
@@ -139,10 +144,13 @@ func _on_hitbox_body_entered(body):
 
 func _on_invincibile_timeout():
 	invincibility = false
-	$CollisionShape2D.disabled = false
-	$Hitbox/CollisionShape2D.disabled = false
 	print("I frame end")
 	$Invincibility.is_stopped()
+	var overlapping_bodies = hitbox_area.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body.is_in_group("enemies"):
+			_on_hitbox_body_entered(body)
+	
 	
 func update_heart_display():
 	for i in range(hearts_list.size()):
@@ -157,3 +165,18 @@ func knockback(enemyVelocity: Vector2):
 func _on_knockback_timeout():
 	playerRagDoll = false
 	$Knockback.is_stopped()
+
+
+func _on_dashing_timeout():
+	dashing = false
+	collision_mask = (1 << 2) | (1 << 3)
+	onCooldown = true
+	SPEED = 300
+	var overlapping_bodies = hitbox_area.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body.is_in_group("enemies"):
+			_on_hitbox_body_entered(body)
+
+
+func _on_dashing_cooldown_timeout():
+	onCooldown = false
