@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://b05mguj1mutmd"]
+
+[ext_resource type="Texture2D" uid="uid://cpj8ekxe8ywrs" path="res://Sprites/UIsprites/Paper_Ui(Large).png" id="1_qbtdl"]
+[ext_resource type="Script" path="res://Scripts/in_game_menu.gd" id="1_qlxc4"]
+
+[node name="InGameMenu" type="CanvasLayer"]
+offset = Vector2(600, 350)
+transform = Transform2D(1, 0, 0, 1, 600, 350)
+script = ExtResource("1_qlxc4")
+
+[node name="FPSCounter" type="Label" parent="."]
+offset_left = 377.0
+offset_top = -347.0
+offset_right = 551.0
+offset_bottom = -294.0
+
+[node name="MenuBox" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 2)
+texture = ExtResource("1_qbtdl")
+
+[node name="MainMenuButton" type="Button" parent="."]
+offset_left = -125.0
+offset_top = -35.0
+offset_right = -25.0
+offset_bottom = 35.0
+text = "Main Menu"
+
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = 25.0
+offset_top = -35.0
+offset_right = 125.0
+offset_bottom = 35.0
+text = "Settings"
+
+[node name="SettingsMenuBox" type="Sprite2D" parent="SettingsButton"]
+texture_filter = 1
+position = Vector2(-27, 5)
+scale = Vector2(3, 3)
+texture = ExtResource("1_qbtdl")
+
+[node name="SettingsVContainer" type="VBoxContainer" parent="SettingsButton"]
+layout_mode = 0
+offset_left = -151.0
+offset_top = -140.0
+offset_right = 96.0
+offset_bottom = 155.0
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsButton/SettingsVContainer"]
+layout_mode = 2
+text = "TEMPORARY IMPLEMENTATION!"
+
+[node name="FPSLimitSlider" type="HSlider" parent="SettingsButton/SettingsVContainer"]
+layout_mode = 2
+max_value = 1000.0
+
+[node name="FPSCounterCheckBox" type="CheckBox" parent="SettingsButton/SettingsVContainer"]
+layout_mode = 2
+text = "FPS COUNTER"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="SettingsButton/SettingsVContainer"]
+layout_mode = 2
+
+[node name="SFXSlider" type="HSlider" parent="SettingsButton/SettingsVContainer"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="SettingsButton/SettingsVContainer"]
+layout_mode = 2
+selected = 1
+item_count = 3
+popup/item_0/text = "Fullscreen"
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+popup/item_2/text = "Borderless"
+popup/item_2/id = 2
+
+[node name="CloseButton" type="Button" parent="SettingsButton/SettingsVContainer"]
+layout_mode = 2
+text = "CLOSE"
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="item_selected" from="SettingsButton/SettingsVContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="SettingsButton/SettingsVContainer/CloseButton" to="." method="_on_close_button_pressed"]

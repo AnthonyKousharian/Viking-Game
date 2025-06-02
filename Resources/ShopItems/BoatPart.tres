@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=2 format=3 uid="uid://32tphjejvhwn"]
+
+[ext_resource type="Script" path="res://Scripts/shopItem.gd" id="1_f3wqc"]
+
+[resource]
+script = ExtResource("1_f3wqc")
+itemName = "Boat Part"
+itemPrice = 500
+itemDescription = "Buy three of these and you escape"
+itemStock = 3

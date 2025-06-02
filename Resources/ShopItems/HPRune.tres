@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=2 format=3 uid="uid://ggfsy3wcv0tf"]
+
+[ext_resource type="Script" path="res://Scripts/shopItem.gd" id="1_h7ryf"]
+
+[resource]
+script = ExtResource("1_h7ryf")
+itemName = "Health Up"
+itemPrice = 10
+itemDescription = "Increases health by 1"
+itemStock = 10

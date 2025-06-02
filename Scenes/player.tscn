@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b1liwh7vyc4gj" path="res://Sprites/Player/hoodedRun.png" id="3_rpkd0"]
 [ext_resource type="Texture2D" uid="uid://l06enaty1dr5" path="res://Sprites/Player/hooded_hurt.png" id="4_xv7vy"]
 [ext_resource type="Script" path="res://Scripts/attack_area_2d.gd" id="6_jxmj3"]
-[ext_resource type="PackedScene" uid="uid://dkcyr8sgo825t" path="res://temp_health.tscn" id="6_lvigu"]
+[ext_resource type="PackedScene" path="res://temp_health.tscn" id="6_lvigu"]
 [ext_resource type="Texture2D" uid="uid://c1ycupsakda8s" path="res://Sprites/UIsprites/SlashAnimation.png" id="7_5g81i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6oqv"]
@@ -198,6 +198,7 @@ wait_time = 3.0
 wait_time = 0.2
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 offset_left = 3.0
