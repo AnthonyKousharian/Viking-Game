@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b8i3rxqikw2rk"]
+[gd_scene load_steps=29 format=3 uid="uid://2pddflqav00q"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_55xad"]
 [ext_resource type="Texture2D" uid="uid://5tqvjujeptoc" path="res://Sprites/Player/Sprite-0001.png" id="2_2bt2b"]
@@ -162,12 +162,12 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 5
 script = ExtResource("1_55xad")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v28n6")
-animation = &"hurt"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -179,12 +179,20 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-1, 8)
 shape = SubResource("CapsuleShape2D_ikf8l")
 
+[node name="DashingCooldown" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Dashing" type="Timer" parent="."]
+wait_time = 0.1
+
 [node name="Invincibility" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="Knockback" type="Timer" parent="."]
 wait_time = 0.2
@@ -223,6 +231,7 @@ layout_mode = 2
 [node name="Temp Health" parent="UI/HBoxContainer/Health4" instance=ExtResource("6_lvigu")]
 
 [node name="AttackArea2D" type="Area2D" parent="."]
+collision_mask = 3
 script = ExtResource("6_jxmj3")
 
 [node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
@@ -244,6 +253,8 @@ wait_time = 0.25
 [node name="AttackCooldownTimer" type="Timer" parent="AttackArea2D"]
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="DashingCooldown" to="." method="_on_dashing_cooldown_timeout"]
+[connection signal="timeout" from="Dashing" to="." method="_on_dashing_timeout"]
 [connection signal="timeout" from="Invincibility" to="." method="_on_invincibile_timeout"]
 [connection signal="timeout" from="Knockback" to="." method="_on_knockback_timeout"]
 [connection signal="body_entered" from="AttackArea2D" to="AttackArea2D" method="_on_body_entered"]

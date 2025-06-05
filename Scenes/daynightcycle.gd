@@ -9,7 +9,7 @@ signal time_tick(day:int, hour:int, minute:int)
 
 
 @export var gradient_texture:GradientTexture1D
-@export var INGAME_SPEED = 20.0
+@export var INGAME_SPEED = 60.0
 @export var INITIAL_HOUR = 12:
 	set(h):
 		INITIAL_HOUR = h
@@ -45,6 +45,7 @@ func _recalculate_time() -> void:
 	
 	if past_minute != minute:
 		time_tick.emit(day, hour, minute)
+		
 
 	
 		
