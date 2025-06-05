@@ -29,7 +29,7 @@ func update() -> void:
 			seed_dict[location].crop_age()
 			ground.set_cell(location, 5, Vector2i(4,4))
 
-#checks if crop age is fully grown and harests if it is
+#checks if crop age is fully grown and harvests if it is
 func full_grown_harvest(location: Vector2i) -> bool: 
 	if location in seed_dict and seed_dict[location].full_grown:
 		seed_dict[location].queue_free()

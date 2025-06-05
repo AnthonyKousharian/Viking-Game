@@ -45,7 +45,6 @@ func _recalculate_time() -> void:
 	
 	if past_minute != minute:
 		time_tick.emit(day, hour, minute)
-		print(time)
 
 	
 		

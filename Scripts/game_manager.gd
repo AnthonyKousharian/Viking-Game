@@ -24,7 +24,7 @@ func place_seeds():
 	var local_coords = ground.map_to_local(coords)#tilemap position using gridsnap
 	#check player pos. and current ground if it's plantable 
 	var data = ground.get_cell_tile_data(coords)#tile data at the prev. coords
-	if data and data.get_custom_data("is_plot") and !data.get_custom_data("has_plant") and get_parent()._takeInventoryItem(WHEAT_SEEDS):
+	if data and data.get_custom_data("is_plot") and !data.get_custom_data("has_plant") and get_parent()._takeInventoryItem(WHEAT_SEEDS,1):
 		
 		#instatiate wheat seeds
 		var seedsinstance = seeds.instantiate()
@@ -64,7 +64,7 @@ func harvest_crops():
 	if data and data.get_custom_data("is_plot") and data.get_custom_data("has_plant"):
 		if seed_manager.full_grown_harvest(coords):
 			#TODO:update player enventory and add a wheat item 
-			if  !data.get_custom_data("is_watered"):
+			if !data.get_custom_data("is_watered"):
 				ground.set_cell(coords, 5, Vector2i(0,4))#makes ground unplantable(dry tile)
 			if data.get_custom_data("is_watered"):
 				ground.set_cell(coords, 5, Vector2i(0,3))#makes ground unplantable(wet  tile)

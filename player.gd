@@ -15,19 +15,20 @@ var SPEED = 300.0
 
 var playerRagDoll: bool = false
 
-var currentHealth: int = 300
+var currentHealth: int = 4
+var maxHealth: int = currentHealth
 var invincibility: bool = false
 var hearts_list: Array[TextureRect]
-
-
+var yieldMultiplier = 1
 
 
 func _ready() -> void:
 	var hearts_parent = $UI/HBoxContainer
 	for child in hearts_parent.get_children():
 		hearts_list.append(child)
-var attack_direction = "Right"
-
+	var attack_direction = "Right"
+	
+	attack_timer.wait_time = 1
 
 func _physics_process(delta: float) -> void:
 	if !playerRagDoll:
@@ -78,7 +79,6 @@ func _physics_process(delta: float) -> void:
 	# Directional Attacking
 	# the speed of the attack animation is relative to attack timer, so that the quicker you can attack
 	# the quicker the animation is
-	attack_timer.wait_time = 1
 	attack_sprite_2d.speed_scale = 1/attack_timer.wait_time
 	
 	if Input.is_action_just_pressed('Attack Left') and not $AttackArea2D.monitoring:
@@ -157,3 +157,19 @@ func knockback(enemyVelocity: Vector2):
 func _on_knockback_timeout():
 	playerRagDoll = false
 	$Knockback.is_stopped()
+
+func _on_stat_upgrade(statUp: Resource, amount: int) -> void:
+	
+	if statUp.itemName == "Health Rune":
+		currentHealth = maxHealth
+		maxHealth += 1
+		
+	else: if statUp.itemName == "Speed Rune":
+		SPEED += amount * (SPEED * 1/4)
+		
+	else: if statUp.itemName == "Attack Speed Rune":
+		attack_timer.wait_time -= .15
+		attack_sprite_2d.speed_scale = 1/attack_timer.wait_time
+		
+	else: if statUp.itemName == "Farming Rune":
+		yieldMultiplier += 2
