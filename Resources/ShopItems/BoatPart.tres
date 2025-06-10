@@ -6,5 +6,5 @@
 script = ExtResource("1_f3wqc")
 itemName = "Boat Part"
 itemPrice = 500
-itemDescription = "Buy three of these and you escape"
-itemStock = 3
+itemDescription = "Buy 5 (five or V) of these and you escape"
+itemStock = 5
