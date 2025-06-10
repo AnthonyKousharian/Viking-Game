@@ -12,12 +12,11 @@ const SHOP_UI = preload("res://Scenes/ShopUI.tscn")
 const PLAYER_INVENTORY = preload("res://Scenes/player_inventory.tscn")
 
 @onready var dayNightCycleUI = $CanvasLayer/DayNightCycleUI
-@onready var main_scene: Node2D = $"."
-@onready var in_game_menu = preload("res://Scenes/in_game_menu.tscn")
+
+
 @onready var player: CharacterBody2D = $Player
 
-const SHOP_UI = preload("res://Scenes/ShopUI.tscn")
-const PLAYER_INVENTORY = preload("res://Scenes/player_inventory.tscn")
+
 
 @onready var player_inventory = PLAYER_INVENTORY.instantiate()
 @onready var menuInstance = in_game_menu.instantiate()
@@ -28,11 +27,7 @@ const PLAYER_INVENTORY = preload("res://Scenes/player_inventory.tscn")
 
 const BOAT_PART = preload("res://Resources/ShopItems/BoatPart.tres")
 
-@onready var player_inventory = PLAYER_INVENTORY.instantiate()
-@onready var menuInstance = in_game_menu.instantiate()
-@onready var shopUInstance = SHOP_UI.instantiate()
-@onready var ui: Control = $UI
-@onready var seed_manager: Node = $SeedManager
+
 @onready var partsLabel = $"Area2D/Boat Parts"
 
 var inBoatArea: bool = false
@@ -79,9 +74,7 @@ func _ready() -> void:
 	pass
 
 
-func _takeInventoryItem(item: Resource):
-	if player_inventory.hot_bar_dictionary.has(item):
-		player_inventory.hot_bar_dictionary[item] -= 1
+
 
 #checks if item has item, if it does reduce its quantity by amountOfItem and update it, then return true, else return false.
 func _takeInventoryItem(item: Resource,amountOfItem: int):
@@ -93,7 +86,7 @@ func _takeInventoryItem(item: Resource,amountOfItem: int):
 	return false
 
 
-func _process(delta: float) -> void:
+
 	
 	
 
@@ -124,7 +117,7 @@ func _process(delta: float) -> void:
 
 	
 	if Input.is_action_just_pressed("Interact") and player_inventory.hot_bar_dictionary.has(BOAT_PART):
-		_takeInventoryItem(BOAT_PART)
+		_takeInventoryItem(BOAT_PART, 1)
 		parts+=1
 		partsLabel.text = "Parts: " + str(parts) + "/5"
 		
