@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Farming Game"
 run/main_scene="res://Scenes/Farmland.tscn"
+run/main_scene="res://Scenes/TitleMenu.tscn"
 config/features=PackedStringArray("4.3")
 
 <<<<<<< Updated upstream
