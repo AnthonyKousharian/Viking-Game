@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 100.0
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var enemy_sprite_2d: AnimatedSprite2D = $Enemy_CollisionShape2D/Enemy_AnimatedSprite2D
 @onready var player: Node2D = null
 
 var health: int = 3

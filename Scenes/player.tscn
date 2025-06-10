@@ -239,7 +239,6 @@ shape = SubResource("RectangleShape2D_k818s")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="AttackArea2D"]
 texture_filter = 1
-position = Vector2(0, -1.49012e-08)
 scale = Vector2(0.71875, 0.757813)
 sprite_frames = SubResource("SpriteFrames_f2by6")
 autoplay = "default"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7xwdvnba8131"]
+[gd_scene load_steps=3 format=3 uid="uid://bnmoe2ieav1e3"]
 
 [ext_resource type="Script" path="res://Scripts/shop_button.gd" id="1_bx4sk"]
 [ext_resource type="Texture2D" uid="uid://cpj8ekxe8ywrs" path="res://Sprites/UIsprites/Paper_Ui(Large).png" id="1_ywi0i"]
@@ -37,5 +37,6 @@ offset_left = 49.0
 offset_top = 35.0
 offset_right = 89.0
 offset_bottom = 58.0
+text = "Money:"
 
 [connection signal="pressed" from="ShopButton" to="." method="_on_shop_button_pressed"]
