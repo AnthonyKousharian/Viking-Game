@@ -17,7 +17,6 @@ const PLAYER_INVENTORY = preload("res://Scenes/player_inventory.tscn")
 @onready var player: CharacterBody2D = $Player
 
 
-
 @onready var player_inventory = PLAYER_INVENTORY.instantiate()
 @onready var menuInstance = in_game_menu.instantiate()
 @onready var shopUInstance = SHOP_UI.instantiate()
