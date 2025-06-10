@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=4 uid="uid://blsxklxwwpjul"]
 
-[ext_resource type="PackedScene" uid="uid://b8i3rxqikw2rk" path="res://Scenes/player.tscn" id="1_8i2rj"]
+[ext_resource type="PackedScene" uid="uid://2pddflqav00q" path="res://Scenes/player.tscn" id="1_8i2rj"]
 [ext_resource type="Script" path="res://Scenes/farmland.gd" id="1_txdqd"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_f21rn"]
 [ext_resource type="Script" path="res://Scenes/farmland.gd" id="1_txdqd"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://2hv3uyeuyx10" path="res://Sprites/Environment/Terrain2.png" id="2_kv58d"]
 [ext_resource type="Texture2D" uid="uid://c2ihrnuywmemn" path="res://Sprites/Environment/Terrain (16x16).png" id="3_2631t"]
 [ext_resource type="PackedScene" uid="uid://cci2xog73qj2j" path="res://Scenes/enemy.tscn" id="5_2f7h8"]
-[ext_resource type="Script" path="res://Scenes/enemy_spawner.gd" id="5_ansv0"]
+[ext_resource type="Script" path="res://Scripts/enemy_spawner.gd" id="5_ansv0"]
 [ext_resource type="Script" path="res://Scenes/WaveManager.gd" id="7_28yfd"]
 [ext_resource type="Script" path="res://Scripts/test_age_button.gd" id="6_ge6rk"]
 [ext_resource type="Script" path="res://Scenes/daynightcycle.gd" id="7_6jssx"]
