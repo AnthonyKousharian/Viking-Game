@@ -3,14 +3,20 @@ extends CanvasLayer
 @onready var v_box_container: VBoxContainer = $"VBoxContainer"
 @onready var description_label: Label = $"DescriptionLabel"
 @onready var texture_rect: TextureRect = $"TextureRect"
+#TODO update total moeny as items are bought 
+#TODO update money label as crops are sold and items are bought
 
 
 const BOAT_PART = preload("res://Resources/ShopItems/BoatPart.tres")
 const WHEAT_SEEDS = preload("res://Resources/ShopItems/WheatSeeds.tres")
 const HP_RUNE = preload("res://Resources/ShopItems/HPRune.tres")
+<<<<<<< Updated upstream
 const SPD_RUNE = preload("res://Resources/ShopItems/SPDRune.tres")
 const AS_RUNE = preload("res://Resources/ShopItems/ASRune.tres")
 const F_RUNE = preload("res://Resources/ShopItems/FRune.tres")
+=======
+@onready var money_counter: Label = $Money
+>>>>>>> Stashed changes
 
 
 signal item_bought(item:Resource,amount_of_item:int) 
@@ -19,6 +25,7 @@ var items_array = []
 
 
 func _ready() -> void:
+	update_money()
 	v_box_container.visible = false
 	
 	items_array.resize(amount_of_items)
@@ -38,20 +45,30 @@ func _ready() -> void:
 	
 	
 func _process(delta: float) -> void:
-	pass
+	update_money()
 
 func _on_item_button_entered(item_button: Button, item: Resource) -> void:
 	description_label.text = item.itemDescription + "\nPrice: $" + str(item.itemPrice) +"\nOwned:" + str(get_parent()._hasInventoryItem(item))
 
 func _on_item_button_pressed(item_button: Button, item: Resource) -> void:
-	if Input.is_action_pressed("Dodge"):
+	if Input.is_action_pressed("Dodge") && Global.money >= (item.itemPrice * 10):
 		item.itemStock = item.itemStock - 10
+		Global.money -= item.itemPrice * 10
 		item_bought.emit(item, 10)
 
 	else:
+<<<<<<< Updated upstream
 		item.itemStock = item.itemStock - 1
 		item_bought.emit(item, 1)
 
+=======
+		if Global.money >= item.itemPrice:
+			item.itemStock = item.itemStock - 1
+			item_bought.emit(item, 1)
+			Global.money -= item.itemPrice 
+			
+		
+>>>>>>> Stashed changes
 	if item.itemStock == 0:
 		item_button.text = "SOLD OUT"
 		item_button.disabled = true
@@ -59,4 +76,11 @@ func _on_item_button_pressed(item_button: Button, item: Resource) -> void:
 	_on_item_button_entered(item_button,item)
 	
 func _on_shop_button_pressed() -> void:
+<<<<<<< Updated upstream
 	v_box_container.visible = !v_box_container.visible
+=======
+	v_box_container.visible = true
+	
+func update_money():
+	money_counter.text = "Money: " + str(Global.money)
+>>>>>>> Stashed changes

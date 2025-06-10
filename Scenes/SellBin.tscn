@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://bg8vqeiytwn5p"]
+[gd_scene load_steps=20 format=3 uid="uid://bg8vqeiytwn5p"]
 
 [ext_resource type="Script" path="res://Sell_bin.gd" id="1_3rnty"]
 [ext_resource type="Texture2D" uid="uid://bijx2j8fep74f" path="res://Sprites/RuneRock.png" id="2_2njnw"]
+[ext_resource type="Texture2D" uid="uid://ex1h17f5p2vl" path="res://Sprites/Rune_Rock_Flash.png" id="3_5osm7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0go6p"]
 atlas = ExtResource("2_2njnw")
@@ -25,6 +26,26 @@ region = Rect2(192, 0, 48, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dm04a"]
 atlas = ExtResource("2_2njnw")
+region = Rect2(192, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di1ny"]
+atlas = ExtResource("3_5osm7")
+region = Rect2(0, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru3io"]
+atlas = ExtResource("3_5osm7")
+region = Rect2(48, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpo1n"]
+atlas = ExtResource("3_5osm7")
+region = Rect2(96, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lufhs"]
+atlas = ExtResource("3_5osm7")
+region = Rect2(144, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afyxr"]
+atlas = ExtResource("3_5osm7")
 region = Rect2(192, 0, 48, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tdlnq"]
@@ -63,6 +84,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_di1ny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru3io")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpo1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lufhs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afyxr")
+}],
+"loop": false,
+"name": &"light_flash",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_tdlnq")
 }],
 "loop": true,
@@ -85,7 +126,7 @@ script = ExtResource("1_3rnty")
 texture_filter = 1
 scale = Vector2(1.33333, 1.33333)
 sprite_frames = SubResource("SpriteFrames_47uln")
-animation = &"glow_start"
+animation = &"light_flash"
 autoplay = "noglow"
 
 [node name="ActiveRange" type="CollisionShape2D" parent="."]

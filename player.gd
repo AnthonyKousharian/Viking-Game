@@ -17,7 +17,10 @@ var SPEED = 300.0
 var playerRagDoll: bool = false
 
 var currentHealth: int = 4
+<<<<<<< Updated upstream
 var maxHealth: int = currentHealth
+=======
+>>>>>>> Stashed changes
 var invincibility: bool = false
 var hearts_list: Array[TextureRect]
 var yieldMultiplier = 1

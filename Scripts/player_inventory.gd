@@ -12,6 +12,9 @@ const WHEAT = preload("res://Resources/ShopItems/Wheat.tres")
 
 signal stat_upgrade(statUp: Resource,amount: int)
 
+
+
+
 var amount_of_items = 6
 var hot_bar_dictionary = {}
 
@@ -27,6 +30,9 @@ func _ready() -> void:
 		hot_bar_container.add_child(slot_texture)
 	pass
 
+
+func change_money(amount:int):
+	Global.money += amount
 
 func _process(delta: float) -> void:
 	pass

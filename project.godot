@@ -14,6 +14,10 @@ config/name="Farming Game"
 run/main_scene="res://Scenes/Farmland.tscn"
 config/features=PackedStringArray("4.3")
 
+[autoload]
+
+Global="*res://global.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
