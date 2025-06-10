@@ -3,17 +3,19 @@
 extends Node
 #Crop resorces 
 @onready var seeds = preload("res://Scenes/Crops/Wheat/WheatCrop2.tscn")
-@onready var ground: TileMapLayer = %Ground
+@onready var ground: TileMapLayer = $"../Ground"
 @onready var player: CharacterBody2D = $"../Player"
 @onready var crops: Node = $"../Crops"
 @onready var seed_manager: Node = $"../SeedManager"
+@onready var sell_bin: Area2D = $"../Interactables/SellBin"
+@onready var main: Node2D = get_parent()#acceses player inventory and farmland
 
 const WHEAT_SEEDS = preload("res://Resources/ShopItems/WheatSeeds.tres")
-
+const WHEAT = preload("res://Resources/ShopItems/Wheat.tres")
 #Healthbar UI
 #TODO: put the camra into main scene and 
 @onready var health_bar = "res://Scenes/UI Stuff/health_bar.tscn"
-
+signal on_money_changed(amount:int)
 
 #TODO: create more of a visual tell when placing seeds 
 #TODO: fix draw placement of crops (coords of player should be at feet?)
@@ -24,7 +26,7 @@ func place_seeds():
 	var local_coords = ground.map_to_local(coords)#tilemap position using gridsnap
 	#check player pos. and current ground if it's plantable 
 	var data = ground.get_cell_tile_data(coords)#tile data at the prev. coords
-	if data and data.get_custom_data("is_plot") and !data.get_custom_data("has_plant") and get_parent()._takeInventoryItem(WHEAT_SEEDS,1):
+	if data and data.get_custom_data("is_plot") and !data.get_custom_data("has_plant") and get_parent()._takeInventoryItem(WHEAT_SEEDS, 1):
 		
 		#instatiate wheat seeds
 		var seedsinstance = seeds.instantiate()
@@ -34,9 +36,10 @@ func place_seeds():
 		seed_manager.register(coords, seedsinstance)
 		#kinda messy code(?)
 		if  !data.get_custom_data("is_watered"):
-			ground.set_cell(coords, 5, Vector2i(4,4))#makes ground unplantable(dry tile)
+			ground.set_cell(coords, 0, Vector2i(4,4))#makes ground unplantable(dry tile)
 		if data.get_custom_data("is_watered"):
-			ground.set_cell(coords, 5, Vector2i(4,3))#makes ground unplantable(wet tile)
+			ground.set_cell(coords, 0, Vector2i(4,3))#makes ground unplantable(wet tile)
+			seed_manager.start_timer(coords)
 			
 
 
@@ -47,9 +50,12 @@ func water_tile():
 	var data = ground.get_cell_tile_data(coords)
 	if data and data.get_custom_data("is_plot") and !data.get_custom_data("is_watered"):
 		if !data.get_custom_data("has_plant"):
-			ground.set_cell(coords, 5, Vector2i(0,3))
+			ground.set_cell(coords, 0, Vector2i(0,3))
+			#if data.get_custom_data("has_plant"):
+			#seed_manager.seed_dict(coords)
 		if data.get_custom_data("has_plant"):
-			ground.set_cell(coords, 5, Vector2i(4,3))
+			ground.set_cell(coords, 0, Vector2i(4,3))
+			seed_manager.start_timer(coords)
 
 
 func water_refill():
@@ -63,14 +69,18 @@ func harvest_crops():
 	var data = ground.get_cell_tile_data(coords)
 	if data and data.get_custom_data("is_plot") and data.get_custom_data("has_plant"):
 		if seed_manager.full_grown_harvest(coords):
-			#TODO:update player enventory and add a wheat item 
-			if !data.get_custom_data("is_watered"):
-				ground.set_cell(coords, 5, Vector2i(0,4))#makes ground unplantable(dry tile)
+			
+			if  !data.get_custom_data("is_watered"):
+				ground.set_cell(coords, 0, Vector2i(0,4))#makes ground unplantable(dry tile)
 			if data.get_custom_data("is_watered"):
-				ground.set_cell(coords, 5, Vector2i(0,3))#makes ground unplantable(wet  tile)
+				ground.set_cell(coords, 0, Vector2i(0,3))#makes ground unplantable(wet  tile)
 			
 			
 			pass
+
+func sell_items():
+	var amount = sell_bin.sell_crops()
+	on_money_changed.emit(amount)
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -81,6 +91,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('Interact'):
 		place_seeds()
 		harvest_crops()
+		sell_items()
 		
 		
 	if Input.is_action_just_pressed('Water'):
