@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=2 format=3 uid="uid://dph1jbp8wp3vd"]
+
+[ext_resource type="Script" path="res://Scripts/shopItem.gd" id="1_qwccl"]
+
+[resource]
+script = ExtResource("1_qwccl")
+itemName = "Speed Rune"
+itemPrice = 5
+itemDescription = "Increases player speed"
+itemStock = 5

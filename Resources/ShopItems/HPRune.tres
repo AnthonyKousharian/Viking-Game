@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_h7ryf")
-itemName = "Health Up"
+itemName = "Health Rune"
 itemPrice = 10
-itemDescription = "Increases health by 1"
-itemStock = 10
+itemDescription = "Increases your Health"
+itemStock = 5

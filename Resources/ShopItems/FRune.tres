@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=2 format=3 uid="uid://dqxeyg83e4pby"]
+
+[ext_resource type="Script" path="res://Scripts/shopItem.gd" id="1_yjq8k"]
+
+[resource]
+script = ExtResource("1_yjq8k")
+itemName = "Farming Rune"
+itemPrice = 1000
+itemDescription = "Increases"
+itemStock = 4

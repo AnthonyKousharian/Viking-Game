@@ -1,6 +1,6 @@
-[gd_scene load_steps=27 format=4 uid="uid://blsxklxwwpjul"]
+[gd_scene load_steps=19 format=4 uid="uid://blsxklxwwpjul"]
 
-[ext_resource type="PackedScene" uid="uid://2pddflqav00q" path="res://Scenes/player.tscn" id="1_8i2rj"]
+[ext_resource type="PackedScene" uid="uid://b8i3rxqikw2rk" path="res://Scenes/player.tscn" id="1_8i2rj"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_f21rn"]
 [ext_resource type="Script" path="res://Scenes/farmland.gd" id="1_txdqd"]
 [ext_resource type="Script" path="res://Scripts/seed_manager.gd" id="2_gp011"]
@@ -13,8 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://bkpc1kjm4t2xn" path="res://assets/daynightcycle-gradient-texture.tres" id="8_7vb15"]
 [ext_resource type="PackedScene" uid="uid://dnol63gt2xr3l" path="res://Scenes/UI Stuff/health_bar.tscn" id="8_sajeu"]
 [ext_resource type="PackedScene" uid="uid://cpxmq0biqo6ri" path="res://day_night_cycle_ui.tscn" id="9_s68am"]
-[ext_resource type="PackedScene" uid="uid://bq5ku8win4vmf" path="res://wall.tscn" id="14_tm7iy"]
-[ext_resource type="Texture2D" uid="uid://bnuejk1a275v4" path="res://Boat.png" id="15_tasww"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bwdh"]
 texture = ExtResource("2_kv58d")
@@ -234,46 +232,6 @@ vertices = PackedVector2Array(1204.82, 691.898, 1.14062, 681.094, 10.8516, 8.960
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1, -1, 1203, -5, 1215, 702, -9, 691)])
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m0dy6"]
-radius = 52.0
-height = 184.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r6f6i"]
-atlas = ExtResource("15_tasww")
-region = Rect2(0, 0, 192, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w55tw"]
-atlas = ExtResource("15_tasww")
-region = Rect2(192, 0, 192, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_su31b"]
-atlas = ExtResource("15_tasww")
-region = Rect2(384, 0, 192, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_58f37"]
-atlas = ExtResource("15_tasww")
-region = Rect2(576, 0, 192, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_l283g"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r6f6i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w55tw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_su31b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_58f37")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_txdqd")
 
@@ -292,7 +250,6 @@ tile_set = SubResource("TileSet_n7m5b")
 [node name="Crops" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_8i2rj")]
-z_index = 2
 position = Vector2(288, 287)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -352,47 +309,3 @@ gradient_texture = ExtResource("8_7vb15")
 layer = -1
 
 [node name="DayNightCycleUI" parent="CanvasLayer" instance=ExtResource("9_s68am")]
-
-[node name="Wall" parent="." instance=ExtResource("14_tm7iy")]
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, 448)
-
-[node name="Boat Parts" type="Label" parent="Area2D"]
-z_index = 10
-offset_left = 631.0
-offset_top = 70.0
-offset_right = 745.0
-offset_bottom = 93.0
-text = "Parts: 0/5"
-metadata/_edit_use_anchors_ = true
-
-[node name="Boat" type="Label" parent="Area2D"]
-z_index = 10
-offset_left = 624.0
-offset_top = 48.0
-offset_right = 718.0
-offset_bottom = 71.0
-text = "Escape Boat"
-metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-top_level = true
-position = Vector2(672, 512)
-shape = SubResource("CapsuleShape2D_m0dy6")
-debug_color = Color(0.95877, 0, 0.525319, 0.42)
-
-[node name="Polygon2D" type="Polygon2D" parent="Area2D/CollisionShape2D"]
-position = Vector2(-681, -109)
-color = Color(0.00820202, 0.00820202, 0.00820202, 1)
-polygon = PackedVector2Array(647, 188, 656, 195, 667, 199, 680, 201, 694, 199, 707, 194, 718, 186, 726, 175, 731, 163, 733, 149, 733, 69, 731, 56, 726, 43, 718, 33, 707, 24, 695, 19, 682, 17, 668, 19, 655, 24, 644, 33, 636, 43, 631, 55, 629, 68, 629, 147, 631, 162, 635, 174)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
-texture_filter = 1
-position = Vector2(672, 128)
-sprite_frames = SubResource("SpriteFrames_l283g")
-autoplay = "default"
-frame_progress = 0.311241
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
