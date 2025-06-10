@@ -10,4 +10,6 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: CharacterBody2D) -> void:
-	print("take_damage")
+	if body.has_method("take_damage"):
+		var direction = body.global_position - global_position
+		body.take_damage(direction)
